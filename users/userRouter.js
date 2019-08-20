@@ -1,6 +1,8 @@
 const router = require('express').Router();
+const Users = require('../users/helpers');
+const protect = require('../auth/cookieMiddleware');
 
-router.get('/', (req, res) => {
+router.get('', protect, (req, res) => {
   Users.find()
     .then(users => {
       res.status(201).json(users)
@@ -10,7 +12,7 @@ router.get('/', (req, res) => {
     })
 });
 
-server.get('/:id', (req, res) => {
+router.get('/:id', protect, (req, res) => {
   const { id } = req.params;
   Users.findById(id)
     .then(user => {

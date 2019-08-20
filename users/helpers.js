@@ -21,7 +21,7 @@ function add(user) {
 };
 
 function findById(id) {
-  return db('users2').select('id').where('id', '=', id);
+  return db('users2').where('id', '=', id);
 };
 
 function findBy(type) {
