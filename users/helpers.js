@@ -8,11 +8,11 @@ module.exports = {
 }
 
 function find() {
-  return db('users');
+  return db('users2');
 };
 
 function add(user) {
-  return db('users')
+  return db('users2')
     .insert(user, 'id')
     .then(ids => {
       const [id] = ids;
@@ -21,9 +21,9 @@ function add(user) {
 };
 
 function findById(id) {
-  return db('users').where({ id });
+  return db('users2').select('id').where('id', '=', id);
 };
 
 function findBy(type) {
-  return db('users').where(type);
+  return db('users2').where(type);
 }
