@@ -26,8 +26,9 @@ const sessionConfig = {
 
 }
 
+server.use(session(sessionConfig)); // The order matters here!
+
 server.use('/api/auth', authRouter);
 server.use('/api/user', userRouter);
-server.use(session(sessionConfig));
 
 module.exports = server;
