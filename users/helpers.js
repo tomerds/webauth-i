@@ -4,10 +4,11 @@ module.exports = {
   find,
   add,
   findById,
+  findBy,
 }
 
 function find() {
-  return db('users').select('id', 'username', 'password');
+  return db('users');
 };
 
 function add(user) {
@@ -20,7 +21,9 @@ function add(user) {
 };
 
 function findById(id) {
-  return db('users').where({ id }).first()
+  return db('users').where({ id });
 };
 
-
+function findBy(type) {
+  return db('users').where(type);
+}
