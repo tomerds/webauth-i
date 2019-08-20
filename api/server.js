@@ -23,7 +23,6 @@ const sessionConfig = {
     resave: false, // 
     saveUninitialized: false, // GDPR 
   }
-
 }
 
 server.use(session(sessionConfig)); // The order matters here!
