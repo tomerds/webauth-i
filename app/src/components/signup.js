@@ -1,9 +1,8 @@
 import axios from 'axios';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Button, Card, Input, Label } from 'reactstrap';
 
-class Login extends React.Component {
+class Signup extends React.Component {
 
   constructor(props) {
     super(props);
@@ -34,10 +33,9 @@ class Login extends React.Component {
       username: this.state.username,
       password: this.state.password
     }
-    axios.post('http://localhost:5000/api/auth/login', object)
+    axios.post('http://localhost:5000/api/auth/register', object)
       .then(res => {
-        console.log(res)
-        localStorage.token = res.data.token;
+        console.log('hello')
         this.setState({ ...this.setState, loggedIn: true })
       })
       .catch(err => {
@@ -46,24 +44,12 @@ class Login extends React.Component {
     this.setState({ ...this.setState, username: '', password: '' })
   }
 
-  getUsers = (e) => {
-    e.preventDefault();
-    axios.get('http://localhost:5000/api/user', { headers: { Authorization: localStorage.token } })
-      .then(res => {
-        console.log(res)
-        this.setState({ ...this.setState, users: res })
-      })
-      .catch(err => {
-        console.log(err);
-      })
-  }
-
   render() {
     return (
       <div className='page-container'>
         <div className='login-container'>
           <Card className='card-container'>
-            <h1>Login</h1>
+            <h1>Sign Up</h1>
             <div className='input-container'>
               <Label for='username'>Username</Label>
               <Input placeholder='input username' type='text' name='username' value={this.state.username} onChange={this.handleChange}></Input>
@@ -71,14 +57,6 @@ class Login extends React.Component {
               <Input placeholder='input password' type='password' name='password' value={this.state.password} onChange={this.handleChange}></Input>
               <Button onClick={this.submitForm}>Login</Button>
             </div>
-            <div className='register-container'>
-              <h3 className='hdr'>Not registered yet?</h3>
-              <Link to='/signup' style={{ textDecoration: 'none' }}>
-                <Button className="signup" onClick={this.signUp}>Sign up</Button>
-              </Link>
-            </div>
-            <Button className='butonee' onClick={this.getUsers}>Users</Button>
-            <Button className='butonee' onClick={() => { localStorage.removeItem("token") }}>Log Out</Button>
           </Card>
         </div >
       </div>
@@ -86,4 +64,4 @@ class Login extends React.Component {
   }
 };
 
-export default Login;
+export default Signup;
