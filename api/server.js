@@ -22,8 +22,8 @@ const sessionConfig = {
     maxAge: 1 * 24 * 60 * 60 * 1000,
     secure: false, //change to true for production, can put in env variable
     httpOnly: true,
-    resave: false, // 
-    saveUninitialized: false, // GDPR 
+    resave: false,
+    saveUninitialized: false,
   }
 }
 
