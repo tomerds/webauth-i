@@ -15,12 +15,6 @@ class Login extends React.Component {
     };
   };
 
-  componentDidMount() {
-    axios.get('http://localhost:5000/api/user')
-      .then(res => this.setState({ ...this.setState, users: res.data }))
-      .catch(err => console.log(err))
-  }
-
   handleChange = (event) => {
     event.preventDefault();
     this.setState({
@@ -39,9 +33,11 @@ class Login extends React.Component {
         console.log(res)
         localStorage.token = res.data.token;
         this.setState({ ...this.setState, loggedIn: true })
+        alert('Successful log in')
       })
       .catch(err => {
         console.log(err);
+        alert('unsuccessful log in')
       })
     this.setState({ ...this.setState, username: '', password: '' })
   }
@@ -51,7 +47,7 @@ class Login extends React.Component {
     axios.get('http://localhost:5000/api/user', { headers: { Authorization: localStorage.token } })
       .then(res => {
         console.log(res)
-        this.setState({ ...this.setState, users: res })
+        this.setState({ ...this.setState, users: res.data })
       })
       .catch(err => {
         console.log(err);
@@ -78,12 +74,16 @@ class Login extends React.Component {
               </Link>
             </div>
             <Button className='butonee' onClick={this.getUsers}>Users</Button>
-            <Button className='butonee' onClick={() => { localStorage.removeItem("token") }}>Log Out</Button>
+            <Button className='butonee' onClick={() => {
+              localStorage.removeItem("token");
+              alert('You logged out')
+            }}>Log Out</Button>
           </Card>
         </div >
       </div>
     )
   }
 };
+
 
 export default Login;
